@@ -6,7 +6,7 @@ export default async function Contact() {
 
   return (
     <>
-      <h1 className='text-2xl font-bold mb-8'>Contact Us</h1>
+      <h1 className='text-2xl font-bold mb-3'>Contact Us</h1>
       <Form config={config} action={contactAction}></Form>
     </>
   )
