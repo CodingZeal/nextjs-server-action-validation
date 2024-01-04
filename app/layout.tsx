@@ -28,6 +28,13 @@ export default function RootLayout({
             {children}
           </section>
         </main>
+        <footer className='absolute bottom-0 w-full py-8'>
+          <div className='flex justify-center text-sm'>
+            <span>Copyright © {new Date().getFullYear()}. <a href='https://codingzeal.com' target='_blank' className='text-green-700 underline font-semibold hover:no-underline'>ZEAL</a>. All Rights Reserved.</span>
+            <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <a href='#' target='_blank' className='text-green-700 underline font-semibold hover:no-underline'>Source Code</a>
+          </div>
+        </footer>
       </body>
     </html>
   )
