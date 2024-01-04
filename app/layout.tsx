@@ -28,11 +28,11 @@ export default function RootLayout({
             {children}
           </section>
         </main>
-        <footer className='absolute bottom-0 w-full py-8'>
-          <div className='flex justify-center text-sm'>
-            <span>Copyright © {new Date().getFullYear()}. <a href='https://codingzeal.com' target='_blank' className='text-green-700 underline font-semibold hover:no-underline'>ZEAL</a>. All Rights Reserved.</span>
-            <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-            <a href='#' target='_blank' className='text-green-700 underline font-semibold hover:no-underline'>Source Code</a>
+        <footer className='absolute bottom-0 w-full py-8 px-4'>
+          <div className='flex flex-col items-center md:flex-row md:justify-center'>
+            <small className='text-sm text-center md:text-left'>Copyright © {new Date().getFullYear()}. <a href='https://codingzeal.com' target='_blank' className='text-green-700 underline font-semibold hover:no-underline'>ZEAL</a>. All Rights Reserved.</small>
+            <small className='text-sm hidden md:block'>&nbsp;&nbsp;|&nbsp;&nbsp;</small>
+            <small><a href='#' target='_blank' className='text-sm text-green-700 underline font-semibold hover:no-underline'>Source Code</a></small>
           </div>
         </footer>
       </body>
