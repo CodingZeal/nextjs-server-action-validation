@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import type { ZodIssue } from "zod";
 
 type Props = {
@@ -76,13 +76,25 @@ export default function Form({ action, config }: Props) {
         </label>
         <ErrorMessages errors={messageErrors} />
 
-        <button className="cursor-pointer bg-green-400 border-2 border-black text-black p-4 uppercase font-bold hover:bg-yellow-300 hover:text-black">
-          Mix that Tape
-        </button>
+        <SubmitButton />
       </form>
     </>
   );
 }
+
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
+  const text = pending ? "Let the beat drop..." : "Mix that Tape";
+
+  return (
+    <button
+      disabled={pending}
+      className="bg-green-400 border-2 border-black cursor-pointer disabled:bg-gray-300 disabled:cursor-not-allowed disabled:text-gray-500 disabled:border-gray-500 font-bold hover:bg-yellow-300 hover:text-black p-4 text-black uppercase"
+    >
+      {text}
+    </button>
+  );
+};
 
 const ErrorMessages = ({ errors }: { errors: string[] }) =>
   errors.map((item) => (
