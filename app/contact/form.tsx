@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import { useFormState } from "react-dom";
 import type { ZodIssue } from "zod";
 
@@ -15,9 +16,19 @@ type Props = {
 
 export default function Form({ action, config }: Props) {
   const [state, formAction] = useFormState(action, { errors: [] });
-  const nameErrors = getErrors("name", state.errors);
-  const emailErrors = getErrors("email", state.errors);
-  const messageErrors = getErrors("message", state.errors);
+  const findErrors = useCallback(
+    (fieldName: string) => {
+      return state.errors
+        .filter((item) => {
+          return item.path.includes(fieldName);
+        })
+        .map((item) => item.message);
+    },
+    [state.errors]
+  );
+  const nameErrors = findErrors("name");
+  const emailErrors = findErrors("email");
+  const messageErrors = findErrors("message");
 
   return (
     <>
@@ -79,11 +90,3 @@ const ErrorMessages = ({ errors }: { errors: string[] }) =>
       {item}
     </div>
   ));
-
-const getErrors = (fieldName: string, errors: ZodIssue[]) => {
-  return errors
-    .filter((item) => {
-      return item.path.includes(fieldName);
-    })
-    .map((item) => item.message);
-};
