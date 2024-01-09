@@ -37,27 +37,31 @@ export default function Form({ action, config }: Props) {
         action={formAction}
       >
         <div className="flex flex-col w-full gap-4 md:flex-row md:gap-5">
-          <label htmlFor="name" className="flex flex-col w-full">
-            <span className="mr-2">Name</span>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              className="border-black border-2"
-            />
-          </label>
-          <ErrorMessages errors={nameErrors} />
+          <div className="flex flex-col gap-2 w-full">
+            <label htmlFor="name" className="flex flex-col w-full">
+              <span className="mr-2">Name</span>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                className="border-black border-2"
+              />
+            </label>
+            <ErrorMessages errors={nameErrors} />
+          </div>
 
-          <label htmlFor="email" className="flex flex-col w-full">
-            <span className="mr-2">Email</span>
-            <input
-              id="email"
-              type="text"
-              name="email"
-              className="border-black border-2"
-            />
-          </label>
-          <ErrorMessages errors={emailErrors} />
+          <div className="flex flex-col gap-2 w-full">
+            <label htmlFor="email" className="flex flex-col w-full">
+              <span className="mr-2">Email</span>
+              <input
+                id="email"
+                type="text"
+                name="email"
+                className="border-black border-2"
+              />
+            </label>
+            <ErrorMessages errors={emailErrors} />
+          </div>
         </div>
 
         <label htmlFor="message" className="flex flex-col w-full">
@@ -96,9 +100,8 @@ const SubmitButton = () => {
   );
 };
 
-const ErrorMessages = ({ errors }: { errors: string[] }) =>
-  errors.map((item) => (
-    <div className="text-red-600" key={item}>
-      {item}
-    </div>
-  ));
+const ErrorMessages = ({ errors }: { errors: string[] }) => {
+  const text = errors.join(", ");
+
+  return <div className="text-red-600">{text}</div>;
+};

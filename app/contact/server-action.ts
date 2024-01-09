@@ -7,10 +7,10 @@ const MIN = 20
 const MAX = 500
 
 const schema = z.object({
-  name: z.string().min(1, 'Name cannot be blank.'),
-  email: z.string().email().min(1, 'Email cannot be blank.'),
-  message: z.string().max(MAX).min(MIN)
-})
+  name: z.string().min(1, "Name cannot be blank"),
+  email: z.string().email().min(1, "Email cannot be blank"),
+  message: z.string().max(MAX).min(MIN),
+});
 
 export default async function contactAction(_prevState: any, params: FormData) {
   const validation = await schema.safeParse({
