@@ -5,7 +5,10 @@ import { useFormState, useFormStatus } from "react-dom";
 import type { ZodIssue } from "zod";
 
 type Props = {
-  action: (_prevState: any, params: FormData) => { errors: ZodIssue[] };
+  action: (
+    _prevState: any,
+    params: FormData
+  ) => Promise<{ errors: ZodIssue[] }>;
   config: {
     message: {
       min: number;
