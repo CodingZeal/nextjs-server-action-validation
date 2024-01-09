@@ -13,14 +13,6 @@ type Props = {
   };
 };
 
-const getErrors = (fieldName: string, errors: ZodIssue[]) => {
-  return errors
-    .filter((item) => {
-      return item.path.includes(fieldName);
-    })
-    .map((item) => item.message);
-};
-
 export default function Form({ action, config }: Props) {
   const [state, formAction] = useFormState(action, { errors: [] });
   const nameErrors = getErrors("name", state.errors);
@@ -43,11 +35,8 @@ export default function Form({ action, config }: Props) {
               className="border-black border-2"
             />
           </label>
-          {nameErrors.map((item) => (
-            <div className="text-red-600" key={item}>
-              {item}
-            </div>
-          ))}
+          <ErrorMessages errors={nameErrors} />
+
           <label htmlFor="email" className="flex flex-col w-full">
             <span className="mr-2">Email</span>
             <input
@@ -57,12 +46,9 @@ export default function Form({ action, config }: Props) {
               className="border-black border-2"
             />
           </label>
-          {emailErrors.map((item) => (
-            <div className="text-red-600" key={item}>
-              {item}
-            </div>
-          ))}
+          <ErrorMessages errors={emailErrors} />
         </div>
+
         <label htmlFor="message" className="flex flex-col w-full">
           <span className="mr-2">
             Which record should we play for you?{" "}
@@ -77,11 +63,8 @@ export default function Form({ action, config }: Props) {
             className="border-black border-2 min-h-20"
           />
         </label>
-        {messageErrors.map((item) => (
-          <div className="text-red-600" key={item}>
-            {item}
-          </div>
-        ))}
+        <ErrorMessages errors={messageErrors} />
+
         <button className="cursor-pointer bg-green-400 border-2 border-black text-black p-4 uppercase font-bold hover:bg-yellow-300 hover:text-black">
           Mix that Tape
         </button>
@@ -89,3 +72,18 @@ export default function Form({ action, config }: Props) {
     </>
   );
 }
+
+const ErrorMessages = ({ errors }: { errors: string[] }) =>
+  errors.map((item) => (
+    <div className="text-red-600" key={item}>
+      {item}
+    </div>
+  ));
+
+const getErrors = (fieldName: string, errors: ZodIssue[]) => {
+  return errors
+    .filter((item) => {
+      return item.path.includes(fieldName);
+    })
+    .map((item) => item.message);
+};
