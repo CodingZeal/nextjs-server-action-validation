@@ -42,12 +42,13 @@ export default function Form({ action, config }: Props) {
         <div className="flex flex-col w-full gap-4 md:flex-row md:gap-5">
           <div className="flex flex-col gap-2 w-full">
             <label htmlFor="name" className="flex flex-col w-full">
+              {nameErrors.length > 0 && <span className="hidden peer"></span>}
               <span className="mr-2">Name</span>
               <input
                 id="name"
                 type="text"
                 name="name"
-                className="border-black border-2"
+                className="border-black border-2 peer-[]:border-red-600"
               />
             </label>
             <ErrorMessages errors={nameErrors} />
@@ -55,12 +56,13 @@ export default function Form({ action, config }: Props) {
 
           <div className="flex flex-col gap-2 w-full">
             <label htmlFor="email" className="flex flex-col w-full">
+              {emailErrors.length > 0 && <span className="hidden peer"></span>}
               <span className="mr-2">Email</span>
               <input
                 id="email"
                 type="text"
                 name="email"
-                className="border-black border-2"
+                className="border-black border-2 peer-[]:border-red-600"
               />
             </label>
             <ErrorMessages errors={emailErrors} />
@@ -68,6 +70,7 @@ export default function Form({ action, config }: Props) {
         </div>
 
         <label htmlFor="message" className="flex flex-col w-full">
+          {messageErrors.length > 0 && <span className="hidden peer"></span>}
           <span className="mr-2">
             Which record should we play for you?{" "}
             <span className="text-xs">
@@ -78,7 +81,7 @@ export default function Form({ action, config }: Props) {
           <textarea
             id="message"
             name="message"
-            className="border-black border-2 min-h-20"
+            className="border-black border-2 min-h-20 peer-[]:border-red-600"
           />
         </label>
         <ErrorMessages errors={messageErrors} />
@@ -104,7 +107,9 @@ const SubmitButton = () => {
 };
 
 const ErrorMessages = ({ errors }: { errors: string[] }) => {
+  if (errors.length === 0) return null;
+
   const text = errors.join(", ");
 
-  return <div className="text-red-600">{text}</div>;
+  return <div className="text-red-600 peer">{text}</div>;
 };
