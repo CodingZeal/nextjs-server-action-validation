@@ -13,7 +13,10 @@ const schema = z.object({
 });
 
 export default async function contactAction(_prevState: any, params: FormData) {
-  const validation = await schema.safeParse({
+  // simulate a slow process
+  await new Promise((resolve) => setTimeout(resolve, 1200))
+
+  const validation = schema.safeParse({
     name: params.get('name'),
     email: params.get('email'),
     message: params.get('message')
