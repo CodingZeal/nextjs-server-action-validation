@@ -28,3 +28,11 @@ some details worth including:
 ```
 
 - we match the `path` node to each input field and extract all `message` nodes to build the error message
+
+-- after first post
+
+Can you rewrite that blog post but after the example ZodIssue example json I want to include the full code for contact directory; server action, followed by the contact page and then the form component, explain as much of each as needed
+
+-- did not go well, was not writting proper code but also was not explicity saying it was referencing anything except this file
+
+-- added code manually

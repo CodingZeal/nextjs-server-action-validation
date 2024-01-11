@@ -1,7 +1,7 @@
 import contactAction, { getConfig } from './server-action'
 import Form from './form'
 
-export default async function Contact() {
+export default async function ContactPage() {
   const config = await getConfig()
 
   return (
