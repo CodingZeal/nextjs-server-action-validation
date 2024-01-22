@@ -1,6 +1,6 @@
 # Using Zod for Form Validation with React Server Actions in Next.js
 
-In this blog post, we will explore how to use [Zod](https://zod.dev/), a declarative JavaScript validation library, for form validation in a [Next.js](https://nextjs.org/) application. We will also discuss the importance of server-side validation and how to handle validation errors returned from the server.
+Server-side validation is a critical line of defense against invalid and malicious data, and ensures data integrity and security. In this post, we will explore how to use [Zod](https://zod.dev/), a declarative JavaScript validation library, for server-side form validation in a [Next.js](https://nextjs.org/) application. We will also look into to handling validation errors returned from the server.
 
 ## Sample Application
 
@@ -10,13 +10,11 @@ To view the code referenced in this article, checkout the [repo](https://github.
 
 This article and accompanying example application utilize Next.js version 14.x configured with TailwindCSS and TypeScript.
 
-## The Importance of Server-Side Validation
-
-While client-side validation provides immediate feedback and improves user experience, server-side validation is a must for any application. It acts as a second line of defense against invalid or malicious data. Even if you augment your application with client-side validation, server-side validation is necessary to ensure data integrity and security.
-
 ## Overview of Zod Schema for Validation
 
-Zod allows us to define a validation schema for our form data. This schema is a declarative way of specifying the validation rules for each field. For example, to mark a field as required, we can use the `min(1)` method, which specifies that the field must have a minimum length of 1.
+Zod allows us to define a validation schema for our form data. This schema is a declarative way of specifying the validation rules for each field. For example, to mark a field as required, we can use the `min(1)` method, which specifies that the field must have a minimum length of 1. The 2nd argument is optional and can be used to override the default error message.
+
+Zod has many validation methods for different data types and scenarios, for strings you can use the `email()` method to validate an email address or `url()` to validate a URL, if you have custom needs you can always use `regex()` to validate against a regular expression.
 
 Here's an example of a Zod schema definition:
 
@@ -53,6 +51,7 @@ In our server action, we validate the form data using the Zod schema. If the val
 
 ```ts
 // app/contact/server-action.ts
+
 "use server";
 
 import { redirect } from "next/navigation";
@@ -82,10 +81,11 @@ export default async function contactAction(_prevState: any, params: FormData) {
 
 ## Contact Page
 
-In our contact page, we import the server action and pass it to the `Form` component. The `ContactPage` is a server component while the `Form` component is a client component. We need to use the `useFormState` hook to handle validation errors coming from the server. The `useFormState` hook can only be used in client components.
+In our contact page, we import the server action and pass it to the `Form` component. The `ContactPage` is a [server component](https://nextjs.org/docs/app/building-your-application/rendering/server-components) while the `Form` component is a [client component](https://nextjs.org/docs/app/building-your-application/rendering/client-components). We need to use the `useFormState` hook to handle validation errors coming from the server. The `useFormState` hook can only be used in client components.
 
 ```tsx
 // app/contact/page.tsx
+
 import contactAction from "./server-action";
 import Form from "./form";
 
@@ -105,6 +105,7 @@ In our form component, we use the `useFormState` hook to handle validation error
 
 ```tsx
 // app/contact/form.tsx
+
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
@@ -163,4 +164,12 @@ const findErrors = (fieldName: string, errors: ZodIssue[]) => {
 };
 ```
 
-In conclusion, Zod provides a powerful and flexible way to handle form validation in a Next.js application. By combining it with server-side actions and the `useFormState` hook, we can create robust forms with clear and specific error messages.
+## Wrapping it Up
+
+Zod provides a powerful and flexible way to handle form validation in a Next.js application. We can apply server-side validation to our forms and still present a great user experience by following a few simple steps:
+
+- Define a Zod schema for each server action
+- Validate user input in your server action using the Zod schema
+- Return an array of errors if validation fails
+- In your client component, use the `useFormState` hook to receive validation errors
+- Display the validation errors to the user
