@@ -1,4 +1,4 @@
-# Using Zod for Form Validation with React Server Actions in Next.js
+# How to Use Zod for Form Validation with React Server Actions in Next.js
 
 Server-side validation is a critical line of defense against invalid and malicious data, and ensures data integrity and security. In this post, we will explore how to use [Zod](https://zod.dev/), a declarative JavaScript validation library, for server-side form validation in a [Next.js](https://nextjs.org/) application. We will also look into to handling validation errors returned from the server.
 
