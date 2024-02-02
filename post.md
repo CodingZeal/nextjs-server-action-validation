@@ -14,7 +14,7 @@ This article and accompanying example application utilize Next.js version 14.x c
 
 Zod allows us to define a validation schema for our form data. This schema is a declarative way of specifying the validation rules for each field. For example, to mark a field as required, we can use the `min(1)` method, which specifies that the field must have a minimum length of 1. The 2nd argument is optional and can be used to override the default error message.
 
-Zod has many validation methods for different data types and scenarios, for strings you can use the `email()` method to validate an email address or `url()` to validate a URL, if you have custom needs you can always use `regex()` to validate against a regular expression.
+Zod has many validation methods for different data types and scenarios. You can use the `email()` method to validate an email address, or `url()` to validate a URL. Also, if you have custom needs, you can always use `regex()` to validate against a regular expression.
 
 Here's an example of a Zod schema definition:
 
@@ -43,7 +43,7 @@ When we submit our form, the server-side action validates the form data against 
 }
 ```
 
-Now, let's look at how we can implement this in our Next.js application. We'll start with the server action, then move on to the contact page, and finally the form component.
+Now let's look at how we can implement this in our Next.js application. We'll start with the server action, then move on to the contact page, and finally the form component.
 
 ## Server Action
 
@@ -101,7 +101,7 @@ export default async function ContactPage() {
 
 ## Form Component
 
-In our form component, we use the `useFormState` hook to handle validation errors. We match the `path` node of each error object to the corresponding input field and extract all `message` nodes to build the error message for each field.
+In our form component, we'll use the `useFormState` hook to handle validation errors. We can then match the `path` node of each error object in the form state to its corresponding input field, and extract all the `message` nodes to build an error message for each field.
 
 ```tsx
 // app/contact/form.tsx
@@ -120,7 +120,7 @@ type Props = {
 
 export default function Form({ action }: Props) {
   const [state, formAction] = useFormState(action, { errors: [] });
-  console.log(state);
+
   const nameErrors = findErrors("name", state.errors);
   const emailErrors = findErrors("email", state.errors);
 
@@ -166,10 +166,12 @@ const findErrors = (fieldName: string, errors: ZodIssue[]) => {
 
 ## Wrapping it Up
 
-Zod provides a powerful and flexible way to handle form validation in a Next.js application. We can apply server-side validation to our forms and still present a great user experience by following a few simple steps:
+Zod provides a powerful and flexible way to handle form validation in Next.js applications. Using Zod, you can implement server-side validation to our forms and still present a great user experience by following a few simple steps:
 
 - Define a Zod schema for each server action
 - Validate user input in your server action using the Zod schema
 - Return an array of errors if validation fails
 - In your client component, use the `useFormState` hook to receive validation errors
 - Display the validation errors to the user
+
+Now go build some great forms!
