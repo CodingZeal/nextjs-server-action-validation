@@ -23,6 +23,7 @@ export default async function contactAction(_prevState: any, params: FormData) {
   })
 
   if (validation.success) {
+    // save the data, send an email, etc.
     console.log(validation.data)
     redirect('/')
   } else {

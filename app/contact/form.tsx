@@ -19,6 +19,7 @@ type Props = {
 
 export default function Form({ action, config }: Props) {
   const [state, formAction] = useFormState(action, { errors: [] });
+  console.log(state);
   const findErrors = useCallback(
     (fieldName: string) => {
       return state.errors
