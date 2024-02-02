@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <main className="flex flex-col items-center w-full">
           <nav className='bg-green-400 p-4 flex justify-between items-center w-full'>
-            <h1 className='text-black font-bold text-2xl tracking-wide'>mister deejay</h1>
+            <a className='text-black font-bold text-2xl tracking-wide' href="/">mister deejay</a>
             <ul className='flex justify-end gap-8 text-black font-semibold'>
               <li><Link href="/">Home</Link></li>
               <li><Link href="/contact">Contact</Link></li>
