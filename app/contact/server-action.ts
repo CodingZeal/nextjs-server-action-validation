@@ -3,6 +3,9 @@
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
+import { createTableIfNotExists } from './create-table-action'
+import { createRow } from './create-row-action'
+
 const MIN = 20
 const MAX = 500
 
@@ -13,9 +16,6 @@ const schema = z.object({
 });
 
 export default async function contactAction(_prevState: any, params: FormData) {
-  // simulate a slow process
-  await new Promise((resolve) => setTimeout(resolve, 1200))
-
   const validation = schema.safeParse({
     name: params.get('name'),
     email: params.get('email'),
@@ -23,8 +23,7 @@ export default async function contactAction(_prevState: any, params: FormData) {
   })
 
   if (validation.success) {
-    // save the data, send an email, etc.
-    console.log(validation.data)
+    await createTableIfNotExists().then(() => createRow(validation.data))
     redirect('/')
   } else {
     return {
