@@ -114,7 +114,7 @@ import type { ZodIssue } from "zod";
 type Props = {
   action: (
     _prevState: any,
-    params: FormData
+    params: FormData,
   ) => Promise<{ errors: ZodIssue[] }>;
 };
 

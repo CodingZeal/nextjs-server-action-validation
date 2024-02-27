@@ -7,7 +7,7 @@ import type { ZodIssue } from "zod";
 type Props = {
   action: (
     _prevState: any,
-    params: FormData
+    params: FormData,
   ) => Promise<{ errors: ZodIssue[] }>;
   config: {
     message: {
@@ -28,7 +28,7 @@ export default function Form({ action, config }: Props) {
         })
         .map((item) => item.message);
     },
-    [state.errors]
+    [state.errors],
   );
   const nameErrors = findErrors("name");
   const emailErrors = findErrors("email");
@@ -73,10 +73,10 @@ export default function Form({ action, config }: Props) {
         <label htmlFor="message" className="flex flex-col w-full">
           {messageErrors.length > 0 && <span className="hidden peer"></span>}
           <span className="mr-2">
-            Which record should we play for you?{" "}
+            Which record should we play for you?&nbsp;
             <span className="text-xs">
-              (min {config.message.min} characters, max {config.message.max}{" "}
-              characters)
+              (min {config.message.min} characters, max {config.message.max}
+              &nbsp;characters)
             </span>
           </span>
           <textarea
