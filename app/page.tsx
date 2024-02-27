@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <h1 className="text-2xl font-bold mb-3">Home</h1>
       <p>
-        Hey there mister deejay.{" "}
+        Hey there mister deejay.&nbsp;
         <Link
           href="/contact"
           className="text-green-700 underline font-semibold hover:no-underline"

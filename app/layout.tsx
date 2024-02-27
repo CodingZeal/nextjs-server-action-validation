@@ -35,7 +35,7 @@ export default function RootLayout({
         <footer className="absolute bottom-0 w-full py-8 px-4">
           <div className="flex flex-col items-center md:flex-row md:justify-center">
             <small className="text-sm text-center md:text-left">
-              Copyright © {new Date().getFullYear()}.{" "}
+              Copyright © {new Date().getFullYear()}.&nbsp;
               <a
                 href="https://codingzeal.com"
                 target="_blank"
