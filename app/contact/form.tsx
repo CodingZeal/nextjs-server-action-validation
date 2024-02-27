@@ -7,7 +7,7 @@ import type { ZodIssue } from "zod";
 type Props = {
   action: (
     _prevState: any,
-    params: FormData
+    params: FormData,
   ) => Promise<{ errors: ZodIssue[] }>;
   config: {
     message: {
@@ -28,7 +28,7 @@ export default function Form({ action, config }: Props) {
         })
         .map((item) => item.message);
     },
-    [state.errors]
+    [state.errors],
   );
   const nameErrors = findErrors("name");
   const emailErrors = findErrors("email");
